@@ -98,7 +98,7 @@ class TorrentBytesProvider(TorrentProvider):  # pylint: disable=too-many-instanc
                     logger.log("Search string: {0}".format
                                (search_string.decode("utf-8")), logger.DEBUG)
 
-                search_params[mode]["search"] = search_string
+                search_params[mode]["search"] = re.sub("[^a-zA-Z0-9 ]", "", search_string)
                 data = self.get_url(self.urls["search"], params=search_params[mode], returns="text")
                 if not data:
                     logger.log("No data returned from provider", logger.DEBUG)

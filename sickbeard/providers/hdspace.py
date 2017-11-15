@@ -98,7 +98,8 @@ class HDSpaceProvider(TorrentProvider):  # pylint: disable=too-many-instance-att
             logger.log("Search Mode: {0}".format(mode), logger.DEBUG)
             for search_string in search_strings[mode]:
                 if mode != 'RSS':
-                    search_url = self.urls['search'] % (quote_plus(search_string.replace('.', ' ')),)
+                    str = re.sub("[^a-zA-Z0-9 ]", "", search_string.replace('.', ' '))
+                    search_url = self.urls['search'] % (quote_plus(str),)
                 else:
                     search_url = self.urls['search'] % ''
 
